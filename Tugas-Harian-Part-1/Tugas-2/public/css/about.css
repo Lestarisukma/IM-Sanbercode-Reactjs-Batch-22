@@ -1,0 +1,20 @@
+div{
+    border-style: solid;
+    border-color: lightgray;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    margin-left: 100px;
+    margin-right: 100px;
+    padding-bottom: 40px;
+    padding-top: 40px;
+}
+ol{
+    margin-top: 10px;
+    margin-left: 50px;
+}
+a {
+    margin-left: 100px;
+}
+div h1{
+    text-align: center;
+}

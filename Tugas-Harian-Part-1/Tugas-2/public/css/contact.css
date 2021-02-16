@@ -1,0 +1,41 @@
+div{
+    border-style: solid;
+    border-color: lightgray;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+    padding-bottom: 40px;
+    padding-top: 40px;
+}
+h1{
+    text-align: center;
+}
+dl {
+    margin-left: 100px;
+}
+form{
+    margin-left: 100px;
+}
+#nama, #email{
+    margin-left: 150px;
+    margin-bottom: 30px;
+}
+#laki-laki{
+    margin-left: 92px;
+}
+#perempuan{
+    margin-left: 193px;
+    margin-bottom: 10px;
+}
+textarea{
+    margin-top: 20px;
+    margin-left: 110px;
+}
+#hasil{
+    margin-top: 10px;
+    margin-left: 100px;
+}
+a{
+    margin-left: 100px;;
+}
