@@ -66,3 +66,8 @@ const east = ["Gill", "Brian", "Noel", "Maggie"]
 const combined = [...west, ...east]
 //Driver Code
 console.log(combined)
+
+let buah = ["Semangka", "Jeruk", "Mangga", "Strawberry", "Nangka", "Salak"]
+
+let [buah1, buah2, ...buah3] = buah;
+console.log(buah3)
