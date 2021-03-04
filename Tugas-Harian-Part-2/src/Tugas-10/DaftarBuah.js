@@ -14,15 +14,17 @@ class DaftarBuah extends React.Component{
         return (
             <>
                 <h1 style={{textAlign : "center"}}> Daftar Harga </h1>
-                <table style={{border : "1 px solid", width: "40%", margin:"0 auto"}}>
+                <table style={{border : "1 px solid black", width: "70%", margin:"0 auto"}}>
                     <thead style={{background: "#aaa"}}>
                         <tr>
+                            <th>No</th>
                             <th>Nama</th>
                             <th>Harga</th>
                             <th>Berat</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
-                    <tbody style={{background: "coral"}}>
+                    <tbody style={{background : ""}}>
                         {DaftarHargaBuah.map((el, index)=> {
                             return (
                                 <>
