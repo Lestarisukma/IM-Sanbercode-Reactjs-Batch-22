@@ -4,8 +4,7 @@ import './DataBuah.css'
 
 const HooksWithAxios = () =>{
     const [dataBuah, setdataBuah] = useState(null);
-    const [input, setInput] = useState({name: "", price: "", weight:0});
-    const [currentId, setCurrentId] = useState(null);
+    const [input, setInput] = useState({name: "", price: "", weight:0, id: null});
 
     useEffect( () => {
         if (dataBuah === null){
@@ -26,59 +25,52 @@ const HooksWithAxios = () =>{
 
     const handleEdit = (event) =>{
         let idBuah = parseInt(event.target.value)
-        axios.get(` http://backendexample.sanbercloud.com/api/fruits/${idBuah}`)
+        axios.get(`http://backendexample.sanbercloud.com/api/fruits/${idBuah}`)
         .then(res =>{
             let data = res.data
-            setInput(data.input)
-            setCurrentId(data.id)
+            setInput({name: data.name, price: data.price, weight: data.weight, id: idBuah})
         })
     }
     const handleSubmit = (event) =>{
         event.preventDefault()
-        let id = input.currentId
 
-        if(id == null){
+        if(input.id == null){
             axios.post(`http://backendexample.sanbercloud.com/api/fruits`, 
             {name: input.name, price: input.price, weight: input.weight})
             .then(res =>{
-                let data = res.data
-                let newDataBuah = dataBuah.filter(el => {return el.id !== id})
-                setdataBuah([...newDataBuah, {name: data.name, price: data.price, weight: data.weight}])
+                setdataBuah([...dataBuah, {id: res.data.id, name: input.name, price: input.price, weight: input.weight}])
             })
         }else{
-            axios.put(` http://backendexample.sanbercloud.com/api/fruits/${id}`, {name: input.name, price: input.price, weight: input.weight})
+            axios.put(`http://backendexample.sanbercloud.com/api/fruits/${input.id}`, {name: input.name, price: input.price, weight: input.weight})
             .then(() =>{
-                let newDataBuah = dataBuah.filter(el => {return el.id !== id})
+                let newDataBuah = dataBuah.find(el => {return el.id !== input.id})
                 newDataBuah.name = input.name
-                newDataBuah.price = input.price
+                newDataBuah.price = input.price.toString()
                 newDataBuah.wight = input.weight
-
+                setdataBuah([...dataBuah])
 
             })
 
         }
-        setInput({name: "", price: "", weight:0, currentId: null})
-
-
-      
+        setInput({name: "", price: "", weight:0, id: null})
+ 
     }
     const handleChange = (event) =>{
         let typeOfInput = event.target.name
-        let value = event.target.value
         switch(typeOfInput){
             case "name":
             {
-                setInput({...input, name: value})
+                setInput({...input, name: event.target.value})
                 break;
             }
             case "price":
             {
-                setInput({...input, price: value})
+                setInput({...input, price: event.target.value})
                 break;
             }
             case "wight":
             {
-                setInput({...input, weight: value})
+                setInput({...input, weight: event.target.value})
                 break;
             }
         default:
@@ -89,19 +81,19 @@ const HooksWithAxios = () =>{
     }
     const handleDelete = (event) => {
         let idBuah = parseInt(event.target.value)
-        axios.delete(` http://backendexample.sanbercloud.com/api/fruits/${idBuah}`)
-        .then(() => {
-            let newDataBuah = dataBuah.filter(el=> {return el.id !== idBuah})
-            let editDataBuah = dataBuah[currentId]
 
-            if(editDataBuah !== undefined){
-                let newIndex = dataBuah.findIndex((el) => el === editDataBuah)
-                setdataBuah(newDataBuah)
-                setCurrentId(newIndex)
-            }else{
-                setdataBuah(newDataBuah)
-            }
+        if (idBuah === input.id){
+        setInput({...input, id: null})
+        }
+
+        let newDataBuah = dataBuah.filter(el => el.id !== idBuah)
+        setdataBuah([...newDataBuah])
+        axios.delete(`http://backendexample.sanbercloud.com/api/fruits/${idBuah}`)
+        .then(res => {
+            console.log(res)
         })
+
+
     }
     
 
@@ -120,7 +112,7 @@ const HooksWithAxios = () =>{
                     </thead>
                     <tbody>
                         {
-                            dataBuah.map((val, index) => {
+                            dataBuah !== null && dataBuah.map((val, index) => {
                                 return(
                                     <tr key={index}>
                                         <td>{index+1}</td>
