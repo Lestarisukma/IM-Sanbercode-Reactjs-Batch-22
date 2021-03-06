@@ -17,11 +17,9 @@ class DaftarBuah extends React.Component{
                 <table style={{border : "1 px solid black", width: "70%", margin:"0 auto"}}>
                     <thead style={{background: "#aaa"}}>
                         <tr>
-                            <th>No</th>
                             <th>Nama</th>
                             <th>Harga</th>
                             <th>Berat</th>
-                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody style={{background : ""}}>

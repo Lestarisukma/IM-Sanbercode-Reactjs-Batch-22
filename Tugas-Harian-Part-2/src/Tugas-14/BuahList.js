@@ -24,6 +24,7 @@ const BuahList = () =>{
 
     const handleEdit = (event) =>{
         let idBuah = parseInt(event.target.value)
+        setdataBuah({...dataBuah})
         setCurrentId(idBuah)
     }
  

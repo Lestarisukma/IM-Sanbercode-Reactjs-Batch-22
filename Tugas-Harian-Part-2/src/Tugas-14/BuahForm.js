@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from "react"
 import axios from "axios"
 import {BuahContext} from './BuahContext' 
-import './DataBuah.css'
+
 
 const BuahForm = () =>{
     const [dataBuah, setdataBuah, currentId] = useContext(BuahContext) 
@@ -12,7 +12,7 @@ const BuahForm = () =>{
             axios.get(`http://backendexample.sanbercloud.com/api/fruits/${currentId}`)
             .then(res =>{
                 let data = res.data  
-                setInput({name: data.name, price : data.price,weight: data.weight })  
+                setInput({name: data.name, price : data.price,weight: data.weight})
             })
         }
     }, [currentId])
@@ -21,26 +21,26 @@ const BuahForm = () =>{
     const handleSubmit = (event) =>{
         event.preventDefault()
 
-        let id = input.currentId
-
-        if(id == null){
+        if(input.id == null){
             axios.post(`http://backendexample.sanbercloud.com/api/fruits`, 
             {name: input.name, price: input.price, weight: input.weight})
             .then(res =>{
-                let data = res.data
-                setdataBuah([...dataBuah, {name: data.name, price: data.price, weight: data.weight}])
+                setdataBuah([...dataBuah, {id: res.data.id, name: input.name, price: input.price, weight: input.weight}])
             })
         }else{
-            axios.put(`http://backendexample.sanbercloud.com/api/fruits/${id}`, {name: input.name, price: input.price, weight: input.weight})
+            axios.put(`http://backendexample.sanbercloud.com/api/fruits/${input.id}`, {name: input.name, price: input.price, weight: input.weight})
             .then(() =>{
-                setdataBuah(null)
+                let newDataBuah = dataBuah.filter(el => {return el.id !== input.id})
+                newDataBuah.name = input.name
+                newDataBuah.price = input.price
+                newDataBuah.wight = input.weight
+                setdataBuah([...dataBuah])
+
             })
 
         }
-        setInput({name: "", price: "", weight:0, currentId: null})
- 
+        setInput({name: "", price: "", weight:0, id: null})
     }
-
     const handleChange = (event) =>{
         let typeOfInput = event.target.name
         let value = event.target.value
@@ -68,7 +68,6 @@ const BuahForm = () =>{
 
     return(
         <>
-            {/* Form */}
             <h1>Form Daftar Harga Buah</h1>
                 <div style={{width: "50%", margin: "0 auto", display: 'block'}}>
                     <div style={{border: "1px solid", padding: "20px"}}>

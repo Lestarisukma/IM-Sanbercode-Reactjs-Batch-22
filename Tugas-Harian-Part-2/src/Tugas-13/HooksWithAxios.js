@@ -43,9 +43,9 @@ const HooksWithAxios = () =>{
         }else{
             axios.put(`http://backendexample.sanbercloud.com/api/fruits/${input.id}`, {name: input.name, price: input.price, weight: input.weight})
             .then(() =>{
-                let newDataBuah = dataBuah.find(el => {return el.id !== input.id})
+                let newDataBuah = dataBuah.filter(el => {return el.id !== input.id})
                 newDataBuah.name = input.name
-                newDataBuah.price = input.price.toString()
+                newDataBuah.price = input.price
                 newDataBuah.wight = input.weight
                 setdataBuah([...dataBuah])
 
@@ -53,7 +53,6 @@ const HooksWithAxios = () =>{
 
         }
         setInput({name: "", price: "", weight:0, id: null})
- 
     }
     const handleChange = (event) =>{
         let typeOfInput = event.target.name
