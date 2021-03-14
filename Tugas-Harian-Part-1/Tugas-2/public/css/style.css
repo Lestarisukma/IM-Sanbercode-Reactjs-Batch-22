@@ -1,10 +1,11 @@
-body,html{
+body{
     margin:0;
     padding:0;
 }
 
 body{
     background-image: url(../img/pattern.jpg) ;
+    margin : 0px;
 }
 h1{
     text-align: center;
@@ -19,6 +20,9 @@ section{
     margin-left: 140px;
     margin-right: 140px;
     margin-bottom: 10px;
+    margin-top: 80px;
+    padding-top: 50px;
+    padding-bottom: 100px;
 }
 
 #article-list{
@@ -31,6 +35,8 @@ header{
     width: 100%;
     height: 60px;
     background-color: white;
+    z-index: 1;
+    position: fixed;
 }
 header nav ul{
     width: auto;
@@ -43,14 +49,20 @@ li{
     padding: 20px 10px;
 }
 
-footer{
-    background: black;
-    color: white;
-    padding: 3px;
-    text-align: center;
+footer {
+    display: flex;
+    position: fixed;
     width: 100%;
-    margin-top: 0;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    background-color: black;
+    color: white;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
 }
+
     
 #logo{
     display: inline-block;
