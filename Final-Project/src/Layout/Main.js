@@ -1,19 +1,21 @@
 import React from "react"
-import { Layout } from 'antd';
 import Navbar from "./navbar";
 import Foot from "./Foot";
-import Section from './Section'
-import BodyContent from "../Pages/Home";
+import { BrowserRouter as Router } from "react-router-dom";
+import Section from "./Section";
+
+
 
 
 const Main = () =>{
     return(
-        <Layout className="layout">
-          <Navbar />
-          <BodyContent />
-         {/*  <Section /> */}
-          <Foot />
-        </Layout>
+        <Router>
+          <div>
+            <Navbar />
+            <Section />
+            <Foot />
+          </div>
+        </Router>
       )
 }
 

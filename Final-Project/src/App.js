@@ -3,9 +3,13 @@ import './App.css';
 import 'antd/dist/antd.css'
 import Main from './Layout/Main'
 
+
 function App() {
   return (
-    <Main/>
+    <>
+        <Main />
+    </>
+  
   );
 }
 
